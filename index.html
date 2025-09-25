@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mundialito</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 🔝 Header -->
+  <header>
+    <h1>⚽ Mundialito Club</h1>
+  </header>
+
+  <main>
+    <!-- 🚀 Registrar equipo -->
+    <section class="card">
+      <h2>Registrar equipo</h2>
+      <form id="form-equipo">
+        <input type="text" name="nombre" placeholder="Nombre del equipo" required>
+        <button type="submit">Registrar</button>
+      </form>
+      <div id="mensaje"></div>
+    </section>
+
+    <!-- 🚀 Registrar partido -->
+    <section class="card">
+      <h2>Registrar partido</h2>
+      <form id="form-partido">
+        <div class="form-row">
+          <label for="local">Equipo Local</label>
+          <select id="local" name="local" required></select>
+          <input type="number" name="goles_local" placeholder="Goles Local" min="0" required>
+        </div>
+        <div class="form-row">
+          <label for="visitante">Equipo Visitante</label>
+          <select id="visitante" name="visitante" required></select>
+          <input type="number" name="goles_visitante" placeholder="Goles Visitante" min="0" required>
+        </div>
+        <button type="submit">Registrar partido</button>
+      </form>
+      <div id="mensaje-partido"></div>
+    </section>
+
+    <!-- 🏆 Tabla de posiciones -->
+    <section class="card">
+      <h2>Tabla de posiciones</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Equipo</th>
+            <th>Puntos</th>
+            <th>GF</th>
+            <th>GC</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-equipos"></tbody>
+      </table>
+    </section>
+
+    <!-- 📋 Historial de partidos -->
+    <section class="card">
+      <h2>Partidos jugados</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Local</th>
+            <th>Goles</th>
+            <th>Visitante</th>
+            <th>Goles</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-partidos"></tbody>
+      </table>
+    </section>
+
+<div style="margin-top: 20px; text-align: center;">
+  <button id="reset-torneo" class="btn-reset">🔄 Reiniciar Torneo</button>
+</div>
+
+  </main>
+
+  <!-- 🔻 Footer -->
+  <footer>
+    <p>Desarrollado con ❤️ usando Supabase</p>
+  </footer>
+
+  <script type="module" src="mundialito/main.js"></script>
+</body>
+</html>
