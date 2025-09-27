@@ -200,11 +200,22 @@ async function cargarPartidos() {
 // actualizar estadísticas
 // listar partidos
 
-// 🚀 REINICIAR TORNEO (aquí va tu nuevo bloque)
 const btnReset = document.getElementById("reset-torneo");
 btnReset.addEventListener("click", async () => {
-  ...
+  // Borrar todos los partidos
+  await supabase.from("partidos").delete().neq("id", 0);
+
+  // Borrar todos los equipos
+  await supabase.from("equipos").delete().neq("id", 0);
+
+  // Recargar tablas y selectores
+  cargarEquipos();
+  cargarPartidos();
+  cargarSelectEquipos();
+
+  alert("✅ Torneo reiniciado correctamente");
 });
+
 
 // 🚀 Cargar datos iniciales
 cargarEquipos();
