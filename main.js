@@ -76,19 +76,30 @@ async function cargarEquipos() {
 // 🚀 CARGAR EQUIPOS EN LOS SELECT DEL FORMULARIO PARTIDOS
 // ======================================================
 async function cargarSelectEquipos() {
-  const { data, error } = await supabase.from("equipos").select("*");
+  const { data, error } = await supabase.from("equipos").select("id, nombre");
 
   if (error) {
     console.error("Error cargando equipos:", error.message);
     return;
   }
 
+  const selectLocal = document.getElementById("equipo-local");
+  const selectVisitante = document.getElementById("equipo-visitante");
+
   selectLocal.innerHTML = "";
   selectVisitante.innerHTML = "";
 
-  data.forEach((equipo) => {
-    selectLocal.innerHTML += `<option value="${equipo.id}">${equipo.nombre}</option>`;
-    selectVisitante.innerHTML += `<option value="${equipo.id}">${equipo.nombre}</option>`;
+  data.forEach(equipo => {
+    const optionLocal = document.createElement("option");
+    optionLocal.value = equipo.id;
+    optionLocal.textContent = equipo.nombre;
+
+    const optionVisitante = document.createElement("option");
+    optionVisitante.value = equipo.id;
+    optionVisitante.textContent = equipo.nombre;
+
+    selectLocal.appendChild(optionLocal);
+    selectVisitante.appendChild(optionVisitante);
   });
 }
 

@@ -118,7 +118,7 @@ footer {
    🎯 Estilo para el botón RESET
    =============================== */
 .btn-reset {
-  background-color: #e63946;
+  background-color: green;
   color: white;
   border: none;
   padding: 12px 20px;
