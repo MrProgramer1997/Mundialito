@@ -5,7 +5,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 // Reemplaza con tus credenciales
 // ======================================================
 const SUPABASE_URL = "https://jfonkgyyjakarqhixfvv.supabase.co";
-const SUPABASE_ANON_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impmb25rZ3l5amFrYXJxaGl4ZnZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg3NTA4MjAsImV4cCI6MjA3NDMyNjgyMH0.80LpXXn6IHVPEvE8jwcsUv0xVSc54xxNtr8xSXpP1W4";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impmb25rZ3l5amFrYXJxaGl4ZnZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg3NTA4MjAsImV4cCI6MjA3NDMyNjgyMH0.80LpXXn6IHVPEvE8jwcsUv0xVSc54xxNtr8xSXpP1W4";
 
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -83,8 +83,13 @@ async function cargarSelectEquipos() {
     return;
   }
 
-  const selectLocal = document.getElementById("equipo-local");
-  const selectVisitante = document.getElementById("equipo-visitante");
+  const selectLocal = document.getElementById("local");
+  const selectVisitante = document.getElementById("visitante");
+
+  if (!selectLocal || !selectVisitante) {
+    console.error("❌ No se encontraron los select de equipos en el DOM");
+    return;
+  }
 
   selectLocal.innerHTML = "";
   selectVisitante.innerHTML = "";
@@ -102,6 +107,7 @@ async function cargarSelectEquipos() {
     selectVisitante.appendChild(optionVisitante);
   });
 }
+
 
 // ======================================================
 // 🚀 REGISTRAR PARTIDO
@@ -228,7 +234,9 @@ btnReset.addEventListener("click", async () => {
 });
 
 
-// 🚀 Cargar datos iniciales
-cargarEquipos();
-cargarPartidos();
-cargarSelectEquipos();
+// 🚀 Cargar datos iniciales cuando el DOM está listo
+document.addEventListener("DOMContentLoaded", () => {
+  cargarEquipos();
+  cargarPartidos();
+  cargarSelectEquipos();
+});
