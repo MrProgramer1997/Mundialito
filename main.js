@@ -75,38 +75,37 @@ async function cargarEquipos() {
 // ======================================================
 // 🚀 CARGAR EQUIPOS EN LOS SELECT DEL FORMULARIO PARTIDOS
 // ======================================================
-async function cargarSelectEquipos() {
-  const { data, error } = await supabase.from("equipos").select("id, nombre");
+async function cargarEquipos() {
+  const { data, error } = await supabase.from("equipos").select("*");
 
   if (error) {
-    console.error("Error cargando equipos:", error.message);
+    console.error("Error cargando equipos:", error);
     return;
   }
 
-  const selectLocal = document.getElementById("local");
-  const selectVisitante = document.getElementById("visitante");
+  const localSelect = document.getElementById("local");
+  const visitanteSelect = document.getElementById("visitante");
 
-  if (!selectLocal || !selectVisitante) {
-    console.error("❌ No se encontraron los select de equipos en el DOM");
-    return;
-  }
-
-  selectLocal.innerHTML = "";
-  selectVisitante.innerHTML = "";
+  // Limpia opciones previas
+  localSelect.innerHTML = "<option value='' disabled selected>Seleccione equipo</option>";
+  visitanteSelect.innerHTML = "<option value='' disabled selected>Seleccione equipo</option>";
 
   data.forEach(equipo => {
-    const optionLocal = document.createElement("option");
+    let optionLocal = document.createElement("option");
     optionLocal.value = equipo.id;
-    optionLocal.textContent = equipo.nombre;
+    optionLocal.textContent = equipo.nombre;  // 👈 aquí mostramos el nombre
+    localSelect.appendChild(optionLocal);
 
-    const optionVisitante = document.createElement("option");
+    let optionVisitante = document.createElement("option");
     optionVisitante.value = equipo.id;
-    optionVisitante.textContent = equipo.nombre;
-
-    selectLocal.appendChild(optionLocal);
-    selectVisitante.appendChild(optionVisitante);
+    optionVisitante.textContent = equipo.nombre; // 👈 igual aquí
+    visitanteSelect.appendChild(optionVisitante);
   });
 }
+
+// Llamar al cargar la página
+document.addEventListener("DOMContentLoaded", cargarEquipos);
+
 
 
 // ======================================================
